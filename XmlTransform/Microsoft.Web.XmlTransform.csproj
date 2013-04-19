@@ -6,14 +6,12 @@
     <ExtensionsCommonTargetsExists Condition="Exists('$(ExtensionsCommonTargets)')">true</ExtensionsCommonTargetsExists>
   </PropertyGroup>
   <Import Project="$(ExtensionsCommonTargets)" Condition="$(ExtensionsCommonTargetsExists)" />
-  
   <PropertyGroup>
     <ProjectGuid>{0684EE2A-6F30-4BC7-B5E7-8CBA15534E06}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>Microsoft.Web.XmlTransform</RootNamespace>
     <AssemblyName>Microsoft.Web.XmlTransform</AssemblyName>
   </PropertyGroup>
-  
   <!--If we have no common settings file, let us set up each individual property here -->
   <PropertyGroup Condition="!$(ExtensionsCommonTargetsExists)">
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -37,7 +35,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <!--End each individual property setup-->
-  
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -62,6 +59,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Properties\AssemblyInfoComVisible.cs" />
     <Compile Include="IXmlOriginalDocumentService.cs" />
     <Compile Include="IXmlTransformationLogger.cs" />
     <Compile Include="NamedTypeFactory.cs" />
@@ -104,4 +102,4 @@
     <!--The project will go open source, so running PoliCheck is mandatory-->
     <PolicheckTask RootDirectory="$(ExtensionsRoot)" Directories="$(ProjectDir)" Severities="1|2" ContinueOnError="false" Condition="$(RunPoliCheckOnBuild)=='true'" />
   </Target>
-  </Project>
+</Project>
