@@ -2,11 +2,11 @@
 using System.IO;
 using System.Text;
 using System.Collections.Generic;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace Microsoft.Web.XmlTransform.Test
 {
-    [TestClass]
+    [TestFixture]
     public class XmlTransformTest
     {
         private TestContext testContextInstance;
@@ -22,7 +22,7 @@ namespace Microsoft.Web.XmlTransform.Test
             }
         }
 
-        [TestMethod]
+        [Test]
         public void XmlTransform_Support_WriteToStream()
         {
             string src = CreateATestFile("Web.config", Properties.Resources.Web);
@@ -61,7 +61,7 @@ namespace Microsoft.Web.XmlTransform.Test
             x.Dispose();
         }
 
-        [TestMethod]
+        [Test]
         public void XmlTransform_AttibuteFormatting()
         {
             Transform_TestRunner_ExpectSuccess(Properties.Resources.AttributeFormating_source,
@@ -70,7 +70,7 @@ namespace Microsoft.Web.XmlTransform.Test
                     Properties.Resources.AttributeFormatting_log);
         }
 
-        [TestMethod]
+        [Test]
         public void XmlTransform_TagFormatting()
         {
              Transform_TestRunner_ExpectSuccess(Properties.Resources.TagFormatting_source,
@@ -79,7 +79,7 @@ namespace Microsoft.Web.XmlTransform.Test
                     Properties.Resources.TagFormatting_log);
         }
 
-        [TestMethod]
+        [Test]
         public void XmlTransform_HandleEdgeCase()
         {
             //2 edge cases we didn't handle well and then fixed it per customer feedback.
@@ -91,7 +91,7 @@ namespace Microsoft.Web.XmlTransform.Test
                     Properties.Resources.EdgeCase_log);
         }
 
-        [TestMethod]
+        [Test]
         public void XmlTransform_ErrorAndWarning()
         {
             Transform_TestRunner_ExpectFail(Properties.Resources.WarningsAndErrors_source,
@@ -184,7 +184,9 @@ namespace Microsoft.Web.XmlTransform.Test
 
         private string GetTestFilePath(string filename)
         {
-            string folder = Path.Combine(TestContext.TestDeploymentDir, TestContext.TestName);
+            string testDeploymentDir = Path.GetDirectoryName(typeof(XmlTransformTest).Assembly.Location);
+            string testName = "XmlTransformTests";
+            string folder = Path.Combine(testDeploymentDir, testName);
             Directory.CreateDirectory(folder);
             string file = Path.Combine(folder, filename);
             return file;

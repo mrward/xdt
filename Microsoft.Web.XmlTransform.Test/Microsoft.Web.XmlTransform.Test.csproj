@@ -1,16 +1,17 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <ExtensionsCommonTargets>..\WebPublish.Test.Settings.targets</ExtensionsCommonTargets>
     <ExtensionsCommonTargetsExists>false</ExtensionsCommonTargetsExists>
     <ExtensionsCommonTargetsExists Condition="Exists('$(ExtensionsCommonTargets)')">true</ExtensionsCommonTargetsExists>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
   </PropertyGroup>
   <Import Project="$(ExtensionsCommonTargets)" Condition="$(ExtensionsCommonTargetsExists)" />
   <PropertyGroup>
     <AssemblyName>Microsoft.Web.XmlTransform.Test</AssemblyName>
     <ProjectGuid>{22AC988D-26C0-43A9-8EB1-102DA31F0F8F}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <BuildProjectReferences>true</BuildProjectReferences>
   </PropertyGroup>
   <PropertyGroup Condition="$(ExtensionsCommonTargetsExists)">
@@ -22,7 +23,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU' AND !$(ExtensionsCommonTargetsExists)">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -31,7 +32,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU' AND !$(ExtensionsCommonTargetsExists)">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -45,11 +46,13 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Design" />
     <Reference Include="System.Xml" />
-    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="nunit.framework">
+      <HintPath>..\packages\NUnit.2.6.3\lib\nunit.framework.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\XmlTransform\Microsoft.Web.XmlTransform.csproj">
-      <Project>{0684ee2a-6f30-4bc7-b5e7-8cba15534e06}</Project>
+      <Project>{0684EE2A-6F30-4BC7-B5E7-8CBA15534E06}</Project>
       <Name>Microsoft.Web.XmlTransform</Name>
     </ProjectReference>
   </ItemGroup>
@@ -79,6 +82,7 @@
     <None Include="Resources\TagFormatting_destination.bsl" />
     <None Include="Resources\Web.config" />
     <None Include="Resources\Web.Release.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AttributeFormatting_source.xml" />
