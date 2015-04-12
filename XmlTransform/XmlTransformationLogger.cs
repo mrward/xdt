@@ -208,14 +208,22 @@ namespace Microsoft.Web.XmlTransform
         private string ConvertUriToFileName(XmlDocument xmlDocument) {
             string uri;
             XmlFileInfoDocument errorInfoDocument = xmlDocument as XmlFileInfoDocument;
-            if (errorInfoDocument != null) {
+            if (errorInfoDocument == null) {
+                uri = null;
+            }
+            else if (!string.IsNullOrWhiteSpace(errorInfoDocument.FileName)) {
                 uri = errorInfoDocument.FileName;
             }
-            else {
+            else if (!string.IsNullOrWhiteSpace(errorInfoDocument.BaseURI)) {
                 uri = errorInfoDocument.BaseURI;
             }
+            else {
+                uri = null;
+            }
 
-            return ConvertUriToFileName(uri);
+            return uri == null
+                ? null
+                : ConvertUriToFileName(uri);
         }
 
         private string ConvertUriToFileName(string fileName) {
